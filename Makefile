@@ -1,6 +1,8 @@
 cnf ?= Makefile.env
 include $(cnf)
 
+all: build run
+
 build:
 	docker build -f Dockerfile -t $(IMG_NAME):$(IMG_TAG) .	
 
@@ -16,4 +18,9 @@ run-debug:
 attach-net:
 	docker network connect $(net) $(APP_NAME) 
 
-all: build run
+attach-default-net:
+	-docker network create ztm-net 
+	-docker network create ztm-net-db 
+	-docker network connect ztm-net $(APP_NAME)
+
+debug: build-debug run-debug attach-default-net

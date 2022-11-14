@@ -1,31 +1,16 @@
 package routes
 
 import (
-	middleware "api-gateway/middleware"
-	"encoding/json"
-	"io"
-	"io/ioutil"
 	"net/http"
+
+	ztm "github.com/devcoons/go-ztm"
 
 	"github.com/gin-gonic/gin"
 )
 
-func UnmashalBody(body io.ReadCloser) map[string]interface{} {
-	var values map[string]interface{}
+func InitServiceSJWT(c *gin.Context) (*ztm.SJWTClaims, *ztm.Service, bool) {
 
-	bbody, err := ioutil.ReadAll(body)
-
-	if err != nil {
-		return nil
-	}
-
-	json.Unmarshal([]byte(bbody), &values)
-	return values
-}
-
-func InitServiceSJWT(c *gin.Context) (*middleware.SJWTClaims, *middleware.Service, bool) {
-
-	srv, ok := c.MustGet("service").(*middleware.Service)
+	srv, ok := c.MustGet("service").(*ztm.Service)
 
 	if !ok {
 		c.IndentedJSON(http.StatusExpectationFailed, nil)

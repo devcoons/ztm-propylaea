@@ -1,18 +1,18 @@
 package routes
 
 import (
-	middleware "api-gateway/middleware"
-	utilities "api-gateway/utilities"
 	"encoding/json"
 	"net/http"
 	"strconv"
+
+	ztm "github.com/devcoons/go-ztm"
 
 	"github.com/gin-gonic/gin"
 )
 
 func RoutePOSTLogin(c *gin.Context) {
 
-	srv, ok := c.MustGet("service").(*middleware.Service)
+	srv, ok := c.MustGet("service").(*ztm.Service)
 
 	if !ok || srv == nil {
 		c.IndentedJSON(http.StatusExpectationFailed, nil)
@@ -25,7 +25,7 @@ func RoutePOSTLogin(c *gin.Context) {
 	}
 
 	url := srv.Config.PathAuth.Host + ":" + strconv.Itoa(srv.Config.PathAuth.Port) + srv.Config.PathAuth.URL
-	res, errn := srv.ZTServiceRequest(url, "POST", c.Request.Header, c.Request.Body, middleware.SJWTClaims{Auth: false, Hop: 2, Role: -1, Service: "api-gateway", UserId: -1})
+	res, errn := srv.SRVRequest(url, "POST", c.Request.Header, c.Request.Body, ztm.SJWTClaims{Auth: false, Hop: 2, Role: -1, Service: srv.Config.Ims.Abbeviation, UserId: -1})
 
 	if errn == nil {
 
@@ -34,20 +34,20 @@ func RoutePOSTLogin(c *gin.Context) {
 			return
 		}
 
-		values := UnmashalBody(res.Body)
+		values := ztm.UnmashalBody(res.Body)
 
 		if values["id"] == "" {
 			c.IndentedJSON(http.StatusNotAcceptable, nil)
 			return
 		}
 
-		id := utilities.ConvertToInt(values["id"], -1)
-		role := utilities.ConvertToInt(values["role"], -1)
+		id := ztm.ConvertToInt(values["id"], -1)
+		role := ztm.ConvertToInt(values["role"], -1)
 		nonce := values["nonce"].(string)
 
 		srv.ClearUserNonceFromAll(id)
 
-		token, ok := srv.IssueNewUserJWT(middleware.UJWTClaims{UserId: id, Role: role, Nonce: nonce, Auth: true})
+		token, ok := srv.IssueNewUserJWT(ztm.UJWTClaims{UserId: id, Role: role, Nonce: nonce, Auth: true})
 
 		if !ok {
 			c.IndentedJSON(http.StatusExpectationFailed, nil)

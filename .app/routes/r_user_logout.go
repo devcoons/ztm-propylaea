@@ -1,15 +1,16 @@
 package routes
 
 import (
-	middleware "api-gateway/middleware"
 	"net/http"
+
+	ztm "github.com/devcoons/go-ztm"
 
 	"github.com/gin-gonic/gin"
 )
 
 func RouteUserLogout(c *gin.Context) {
 
-	srv, ok := c.MustGet("service").(*middleware.Service)
+	srv, ok := c.MustGet("service").(*ztm.Service)
 	if !ok || srv == nil {
 		c.IndentedJSON(http.StatusExpectationFailed, nil)
 		return
