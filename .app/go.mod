@@ -39,7 +39,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/devcoons/go-cryptutils v0.0.0-20220515115958-d77f30bffa72
 	github.com/devcoons/go-fmt-colors v0.0.0-20220616122710-93dc5ef9fbd6
-	github.com/devcoons/go-ztm v0.1.0-alpha.1
+	github.com/devcoons/go-ztm v0.1.0-alpha.3
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect

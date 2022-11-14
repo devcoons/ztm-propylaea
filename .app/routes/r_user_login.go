@@ -2,6 +2,7 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -25,14 +26,10 @@ func RoutePOSTLogin(c *gin.Context) {
 	}
 
 	url := srv.Config.PathAuth.Host + ":" + strconv.Itoa(srv.Config.PathAuth.Port) + srv.Config.PathAuth.URL
-	res, errn := srv.SRVRequest(url, "POST", c.Request.Header, c.Request.Body, ztm.SJWTClaims{Auth: false, Hop: 2, Role: -1, Service: srv.Config.Ims.Abbeviation, UserId: -1})
+	fmt.Println(url)
+	res, errn := srv.RequestWithClaims(url, "POST", nil, c.Request.Body, ztm.SJWTClaims{Auth: false, Hop: 2, Role: -1, Service: srv.Config.Ims.Abbeviation, UserId: -1})
 
-	if errn == nil {
-
-		if res.StatusCode != 200 {
-			c.Data(503, "application/json", nil)
-			return
-		}
+	if errn == nil && res != nil && res.StatusCode == 200 {
 
 		values := ztm.UnmashalBody(res.Body)
 
