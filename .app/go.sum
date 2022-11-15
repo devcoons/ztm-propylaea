@@ -22,6 +22,10 @@ github.com/devcoons/go-ztm v0.1.0-alpha.3 h1:+mfTpAdbpkrkV43EGJOmYYmMfdG+sn1oGfo
 github.com/devcoons/go-ztm v0.1.0-alpha.3/go.mod h1:lhE//aRzedLlgCOp8yyNrX3FM+dkjH0MjSzSQfvqjCs=
 github.com/devcoons/go-ztm v0.1.0-alpha.4 h1:OZMppfIH4egEv6Jw5EWECII4XKHifFX+e8cZg9L+DB4=
 github.com/devcoons/go-ztm v0.1.0-alpha.4/go.mod h1:lhE//aRzedLlgCOp8yyNrX3FM+dkjH0MjSzSQfvqjCs=
+github.com/devcoons/go-ztm v0.1.0-alpha.6 h1:5eXz49i+f7/TRWLfA5B8h+C9ah5WGkQsXA9wzDXY3+0=
+github.com/devcoons/go-ztm v0.1.0-alpha.6/go.mod h1:lhE//aRzedLlgCOp8yyNrX3FM+dkjH0MjSzSQfvqjCs=
+github.com/devcoons/go-ztm v0.1.0-beta.1 h1:08ViUN033w3ahmVIeZBiB0glAJc1tjHYPefr8/rU/R0=
+github.com/devcoons/go-ztm v0.1.0-beta.1/go.mod h1:lhE//aRzedLlgCOp8yyNrX3FM+dkjH0MjSzSQfvqjCs=
 github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f h1:lO4WD4F/rVNCu3HqELle0jiPLLBs70cWOduZpkS1E78=
 github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f/go.mod h1:cuUVRXasLTGF7a8hSLbxyZXjz+1KgoB3wDUb6vlszIc=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
