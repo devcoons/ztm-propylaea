@@ -2,7 +2,6 @@ package routes
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -26,7 +25,6 @@ func RoutePOSTLogin(c *gin.Context) {
 	}
 
 	url := srv.Config.PathAuth.Host + ":" + strconv.Itoa(srv.Config.PathAuth.Port) + srv.Config.PathAuth.URL
-	fmt.Println(url)
 	res, errn := srv.RequestWithClaims(url, "POST", nil, c.Request.Body, ztm.SJWTClaims{Auth: false, Hop: 2, Role: -1, Service: srv.Config.Ims.Abbeviation, UserId: -1})
 
 	if errn == nil && res != nil && res.StatusCode == 200 {
@@ -44,12 +42,19 @@ func RoutePOSTLogin(c *gin.Context) {
 
 		srv.ClearUserNonceFromAll(id)
 
-		token, ok := srv.IssueNewUserJWT(ztm.UJWTClaims{UserId: id, Role: role, Nonce: nonce, Auth: true})
+		if id == -1 || role == -1 {
+			c.IndentedJSON(http.StatusExpectationFailed, nil)
+			return
+		}
+
+		isAdmin := srv.IsUserAdmin(&ztm.UJWTClaims{UserId: id, Role: role, Nonce: nonce, Auth: true})
+		token, ok := srv.IssueNewUserJWT(ztm.UJWTClaims{UserId: id, Role: role, Nonce: nonce, Auth: true, SysAdm: isAdmin})
 
 		if !ok {
 			c.IndentedJSON(http.StatusExpectationFailed, nil)
 			return
 		}
+
 		r, _ := json.Marshal(struct {
 			Id       int    `json:"id"`
 			Username string `json:"username"`
