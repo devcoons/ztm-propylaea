@@ -3,6 +3,7 @@ package main
 import (
 	models "api-gateway/models"
 	routes "api-gateway/routes"
+	"flag"
 	"fmt"
 	"os"
 	"runtime"
@@ -22,8 +23,13 @@ func main() {
 	cfgfile, present := os.LookupEnv("IMSCFGFILE")
 
 	if !present {
-		fmt.Println(c.FmtFgBgWhiteLBlue+"[ IMS ]"+c.FmtReset, c.FmtFgBgWhiteRed+" ERRN "+c.FmtReset, c.FmtFgBgWhiteBlack+"Configuration file env.variable `IMSCFGFILE` does not exist"+c.FmtReset)
-		return
+		wordPtr := flag.String("cfg-file", "", "Service Configuration file")
+		flag.Parse()
+		if wordPtr == nil || *wordPtr == "" {
+			fmt.Println(c.FmtFgBgWhiteLBlue+"[ IMS ]"+c.FmtReset, c.FmtFgBgWhiteRed+" ERRN "+c.FmtReset, c.FmtFgBgWhiteBlack+"Configuration file env.variable `IMSCFGFILE` does not exist"+c.FmtReset)
+			return
+		}
+		cfgfile = *wordPtr
 	}
 
 	if !APIService.Initialize(cfgfile) {
