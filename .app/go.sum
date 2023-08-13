@@ -20,6 +20,8 @@ github.com/devcoons/go-fmt-colors v0.0.0-20220616122710-93dc5ef9fbd6 h1:Ld1fKTDk
 github.com/devcoons/go-fmt-colors v0.0.0-20220616122710-93dc5ef9fbd6/go.mod h1:IR7W7wOu7mpmtp0fhaEtMhMi1RdZ5oMWvOJxE5z0xm8=
 github.com/devcoons/go-ztm v0.1.0-beta.5 h1:AS4graN+pCjXVNaDIu55jV0m4peM9ZONPmM1IMTeubk=
 github.com/devcoons/go-ztm v0.1.0-beta.5/go.mod h1:iFzvDpoC9KfxgR+HlZ/yULw80t3pumjGN0ehKmlVqb4=
+github.com/devcoons/go-ztm v0.1.0-beta.6 h1:gh7mHvTgiJvAYg2KL/0kuZdSn3Q8zODiD7645Ze5rSE=
+github.com/devcoons/go-ztm v0.1.0-beta.6/go.mod h1:iFzvDpoC9KfxgR+HlZ/yULw80t3pumjGN0ehKmlVqb4=
 github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f h1:lO4WD4F/rVNCu3HqELle0jiPLLBs70cWOduZpkS1E78=
 github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f/go.mod h1:cuUVRXasLTGF7a8hSLbxyZXjz+1KgoB3wDUb6vlszIc=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=

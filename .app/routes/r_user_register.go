@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 
@@ -28,9 +28,13 @@ func RoutePOSTRegister(c *gin.Context) {
 	res, errn := srv.RequestWithClaims(url, "POST", nil, c.Request.Body, ztm.SJWTClaims{Auth: false, Hop: 2, Role: -1, Service: srv.Config.Ims.Abbeviation, UserId: -1})
 
 	if errn == nil {
-		body, _ := ioutil.ReadAll(res.Body)
+		body, _ := io.ReadAll(res.Body)
 		c.Data(res.StatusCode, res.Header.Get("Content-Type"), body)
 	} else {
+		if res != nil {
+			body, _ := io.ReadAll(res.Body)
+			c.Data(503, "application/json", body)
+		}
 		c.Data(503, "application/json", nil)
 	}
 
